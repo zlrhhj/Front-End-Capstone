@@ -1,4 +1,4 @@
-import ImagesThumbnailList from './ImagesThumbnailList';
+import ImagesThumbnailList from './ImagesThumbnailList.jsx';
 
 var Images = function ( {photoArray, activeStyleIndex} ) {
 
