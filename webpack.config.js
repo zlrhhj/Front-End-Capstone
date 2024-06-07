@@ -3,7 +3,7 @@ require("dotenv").config();
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+
 
 module.exports = {
   mode: "development",
