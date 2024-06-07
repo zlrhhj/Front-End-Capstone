@@ -11,11 +11,11 @@ app.use(express.json());
 
 const instance = axios.create({
   baseURL: `https://app-hrsei-api.herokuapp.com/api/fec2/:${process.env.CAMPUS_CODE}/`,
-  "X-API-Key": 'FILL_ME_IN'
+  "X-API-Key": process.env.X-API-KEY
 });
 
 
 const PORT = 3000;
 
 app.listen(PORT);
-console.log(`Server listening at http://localhost:${PORT}`);
+console.log(`Server listening at http://localhost:${process.env.PORT}`);
