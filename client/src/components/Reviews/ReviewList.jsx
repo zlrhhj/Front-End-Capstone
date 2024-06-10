@@ -56,7 +56,6 @@ function ReviewList({ id }) {
   // eslint-disable-next-line func-names
   const onchange = function (e) {
     if (e.target.value !== sort) {
-      console.log(sort);
       console.log(e.target.value);
       setRiewList([]);
       setSort(e.target.value);
@@ -69,6 +68,7 @@ function ReviewList({ id }) {
     setPage(pages);
     getReviewList(pages, 2, sort, reviewList);
   };
+  const noReviews = reviewList.length === 0;
   return (
     <div>
       <div>
@@ -86,21 +86,33 @@ function ReviewList({ id }) {
           </select>
         </span>
       </div>
-      <div>
-        {
-          reviewList.map((review) => (
+      {
+        noReviews ? (
+          <div>
+            <button type="button"> ADD A REVIEW + </button>
+          </div>
+        )
+          : (
             <div>
-              <Review review={review} />
+              <div>
+                {
+                  reviewList.map((review) => (
+                    <div>
+                      <Review review={review} />
+                    </div>
+                  ))
+                }
+              </div>
+              <div>
+                <button type="button" onClick={handleMorebutton}> MORE REVIEWS </button>
+              </div>
+              <div>
+                <button type="button"> ADD A REVIEW + </button>
+              </div>
             </div>
-          ))
-        }
-      </div>
-      <div>
-        <button type="button" onClick={handleMorebutton}> MORE REVIEWS </button>
-      </div>
-      <div>
-        <button type="button"> ADD A REVIEW + </button>
-      </div>
+          )
+      }
+
     </div>
 
   );
