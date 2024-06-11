@@ -5,7 +5,7 @@ import { faStar as SolidStar } from '@fortawesome/free-solid-svg-icons';
 
 const { useState } = React;
 
-function StarRate() {
+function StarRate({ setStarRating }) {
   const [rating, setRating] = useState(null);
   const [starText, setStarText] = useState(null);
   const [isSelected, setIsSelected] = useState(false);
@@ -26,10 +26,7 @@ function StarRate() {
   const clickStarHandler = (stars) => {
     selected(stars);
     setIsSelected(true);
-    setTimeout(() => {
-      console.log(starText);
-      console.log(isSelected);
-    }, 2000);
+    setStarRating(stars);
   };
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
