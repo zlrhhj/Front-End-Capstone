@@ -4,6 +4,8 @@ import axios from 'axios';
 // eslint-disable-next-line import/extensions
 import AverageStarRating from './AverageStarRating.jsx';
 import Review from './Review.jsx';
+import AddReivew from './AddReview.jsx';
+import SearchBar from './SearchBar.jsx';
 
 const { useEffect, useState } = React;
 function ReviewList({ id }) {
@@ -11,6 +13,9 @@ function ReviewList({ id }) {
   const [sort, setSort] = useState('relevance');
   const [page, setPage] = useState(1);
   const [reviewList, setRiewList] = useState([]);
+  const [isAddClicked, setAddClicked] = useState(false);
+  const [filteredReviews, setFiltered] = useState([]);
+  const [queryItem, setQueryItem] = useState('');
 
   const getTotalReviews = () => {
     axios.get('reviews/meta', { params: { product_id: id } })
@@ -69,8 +74,21 @@ function ReviewList({ id }) {
     getReviewList(pages, 2, sort, reviewList);
   };
   const noReviews = reviewList.length === 0;
+
+
+  function addReivewClick() {
+    setAddClicked(!isAddClicked);
+  }
+
+  function closeAddReview() {
+    setAddClicked(!isAddClicked);
+  }
+
   return (
     <div>
+      <div>
+        <SearchBar setQueryItem={setQueryItem} reviewList={reviewList} setFiltered={setFiltered} />
+      </div>
       <div>
         <span>
           {' '}
@@ -95,24 +113,30 @@ function ReviewList({ id }) {
           : (
             <div>
               <div>
-                {
-                  reviewList.map((review) => (
+                { queryItem.length < 3
+                  ? reviewList.map((review) => (
                     <div>
                       <Review review={review} />
                     </div>
                   ))
-                }
+                  : filteredReviews.map((review) => (
+                    <div>
+                      <Review review={review} />
+                    </div>
+                  ))}
               </div>
               <div>
                 <button type="button" onClick={handleMorebutton}> MORE REVIEWS </button>
               </div>
               <div>
-                <button type="button"> ADD A REVIEW + </button>
+                <button type="button" onClick={addReivewClick}> ADD A REVIEW + </button>
               </div>
             </div>
           )
       }
-
+      <div>
+        {isAddClicked ? <AddReivew product_id={id} closeAddReview={closeAddReview} /> : ''}
+      </div>
     </div>
 
   );
