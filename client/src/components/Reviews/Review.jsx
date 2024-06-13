@@ -26,7 +26,7 @@ function Review({ review }) {
       setResponse(true);
       axios.put('/reviews/:review_id/helpful', { id: review.review_id })
         .then((result) => {
-          console.log("result is", result);
+          console.log('result is', result);
         })
         .catch((err) => {
           console.log(err);
@@ -61,10 +61,15 @@ function Review({ review }) {
 
           </div>
         ) : ''}
-        <div className="response">
-          <p><b>Response:</b></p>
-          <p>{review.response}</p>
-        </div>
+        {
+          review.response ? (
+            <div className="response">
+              <p><b>Response from seller:</b></p>
+              <p>{review.response}</p>
+            </div>
+          ) : ''
+        }
+
         <div>
           <span>Helpful?</span>
           <span className="yes" onClick={helpfulClick}>
