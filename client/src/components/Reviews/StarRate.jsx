@@ -2,6 +2,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as SolidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 
 const { useState } = React;
 
@@ -47,13 +48,13 @@ function StarRate({ setStarRating }) {
             style={{
               position: 'relative',
               display: 'inline-block',
-              width: '20px',
-              height: '20px',
+              width: '40px',
+              height: '40px',
               cursor: 'pointer',
             }}
             onClick={() => { setRating(currentRate); clickStarHandler(currentRate); }}
           >
-            <FontAwesomeIcon icon={SolidStar} color="lightgrey" />
+            <FontAwesomeIcon icon={regularStar} className="fa-2x" color="lightgrey" />
             <div
               style={{
                 position: 'absolute',
@@ -63,13 +64,17 @@ function StarRate({ setStarRating }) {
                 overflow: 'hidden',
               }}
             >
-              <FontAwesomeIcon icon={SolidStar} color="#ffc107" />
+              <FontAwesomeIcon icon={SolidStar} className="fa-2x" color="#ffc107" />
             </div>
           </div>
         );
       })}
       <div>
-        {isSelected ? `  ${starText}` : ' '}
+
+            {' '}
+            {isSelected ? `  ${starText}` : ' '}
+            {' '}
+
       </div>
 
     </div>
