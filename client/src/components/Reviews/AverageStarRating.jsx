@@ -40,7 +40,7 @@ function AverageStarRating({ rating }) {
               }}
             >
 
-              <FontAwesomeIcon icon={SolidStar} color="lightgrey" />
+              <FontAwesomeIcon icon={regularStar} color="lightgrey" />
               <div
                 style={{
                   position: 'absolute',
