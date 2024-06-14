@@ -1,0 +1,235 @@
+.check::before {
+  content: "✓";
+  color: black;
+}
+.thumbnail {
+  display: inline-flex;
+  width: 50px;  /* Set the desired width */
+  height: 50px;  /* Maintain the aspect ratio */
+  border: 1px solid #ddd;  /* Optional: Add a border */
+  padding: 4px;  /* Optional: Add padding */
+  border-radius: 4px;  /* Optional: Add rounded corners */
+}
+.modal {
+
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /*Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(232, 229, 229, 0.97); /* Fallback color */
+  /*background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #3d3a3a;
+  font-size: 30px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+.yes {
+  cursor: pointer;
+}
+
+.add-review {
+
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 20px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(232, 229, 229, 0.97); /* Fallback color */
+  /*background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.review-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-height: 90vh; /* Set the maximum height */
+  overflow-y: auto; /* Enable vertical scroll */
+}
+.review-body {
+  width: 100vh;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-top: 50px;
+}
+
+.upload-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #d1d2d4;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 20px;
+  width: 50px;
+  height: 50px; /* Example height */
+}
+
+.upload-button input[type="file"] {
+  display: none;
+
+}
+
+.uploaded-file {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* SearchBar.css */
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 300px; /* Adjust as needed */
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.search-button {
+  background-color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button:hover {
+  background-color: #f0f0f0;
+}
+
+.search-icon {
+  width: 20px; /* Adjust width as needed */
+  height: 20px; /* Adjust height as needed */
+}
+
+.percentage-bar-container {
+  flex: 1;
+  background-color: #e0e0e0; /* Background color of the bar container */
+  height: 10px;
+  border-radius: 0px;
+  margin: 0 10px;
+  position: relative;
+}
+
+.percentage-bar {
+  background-color: #4caf50; /* Color of the filled bar */
+  height: 100%;
+  border-radius: 0px;
+}
+.stars-ratio-count:hover {
+  color: lightgreen;
+}
+
+.percentage-bar-container:hover {
+  background-color: lightgreen; /* Hover color of the filled bar */
+}
+/* QualityBar.css */
+.characteristics-bar-container {
+  width: 100%;
+  margin: 5px 0;
+  position: relative;
+}
+
+.characteristics-bar-background {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  position: relative;
+  display: flex;
+}
+
+.characteristics-bar-block {
+  flex: 1;
+  background-color:  #e0e0e0;;
+  display: flex;
+  border-left: 5px solid white;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.characteristics-bar-block:nth-child(1) {
+  border-left: 0px;
+}
+.characteristics-triangle {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #000;
+  position: absolute;
+  top: 0px;
+  transform: translateX(-50%);
+}
+
+
+.label-background {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  position: relative;
+}
+
+.label-block {
+  flex: 1;
+  text-align: center;
+}
+.label-block.left {
+  text-align: left;
+}
+.label-block.right {
+  text-align: right;
+}
+.characteristics-container {
+  margin-top: 20px;
+}
