@@ -8,7 +8,7 @@ import AddReivew from './AddReview.jsx';
 import SearchBar from './SearchBar.jsx';
 
 const { useEffect, useState } = React;
-function ReviewList({ id }) {
+function ReviewList({ id, starFilter }) {
   const [totalReviews, setTotalReviews] = useState(0);
   const [sort, setSort] = useState('relevance');
   const [page, setPage] = useState(1);
@@ -18,6 +18,7 @@ function ReviewList({ id }) {
   const [queryItem, setQueryItem] = useState('');
 
   const getTotalReviews = () => {
+    console.log('id = ', id);
     axios.get('reviews/meta', { params: { product_id: id } })
       .then((results) => {
         let total = 0;
@@ -75,7 +76,6 @@ function ReviewList({ id }) {
   };
   const noReviews = reviewList.length === 0;
 
-
   function addReivewClick() {
     setAddClicked(!isAddClicked);
   }
@@ -115,14 +115,20 @@ function ReviewList({ id }) {
               <div>
                 { queryItem.length < 3
                   ? reviewList.map((review) => (
-                    <div>
-                      <Review review={review} />
-                    </div>
+                    starFilter.every((x) => x === false) || starFilter[review.rating - 1]
+                      ? (
+                        <div>
+                          <Review review={review} />
+                        </div>
+                      ) : ''
                   ))
                   : filteredReviews.map((review) => (
-                    <div>
-                      <Review review={review} />
-                    </div>
+                    starFilter.every((x) => x === false) || starFilter[review.rating - 1]
+                      ? (
+                        <div>
+                          <Review review={review} />
+                        </div>
+                      ) : ''
                   ))}
               </div>
               <div>
