@@ -36,7 +36,6 @@ function AverageStarRating({ rating }) {
                 display: 'inline-block',
                 width: '20px',
                 height: '20px',
-                cursor: 'pointer',
               }}
             >
 

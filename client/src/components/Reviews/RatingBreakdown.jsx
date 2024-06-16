@@ -6,7 +6,7 @@ import PercentagBar from './PercentageBar.jsx';
 function RatingBreakdown({ id, starClickHandler }) {
   const [totalReviews, setTotalReviews] = useState(null);
   const [ratings, setRatings] = useState([]);
-  const [recommands, setRecommends] = useState(null);
+  const [recommends, setRecommends] = useState(null);
   const [averageRating, setAverageRating] = useState(null);
   const handleStarsClick = (stars) => {
     starClickHandler(stars);
@@ -26,7 +26,7 @@ function RatingBreakdown({ id, starClickHandler }) {
         }
         setRatings(rates);
         average /= total;
-        average = Math.round(average * 50) / 10;
+        average = (Math.round(average * 50) / 10).toFixed(1);
         setAverageRating(average);
         setTotalReviews(total);
         setRecommends(Math.round((reviews.recommended.true / total) * 100));
@@ -39,10 +39,10 @@ function RatingBreakdown({ id, starClickHandler }) {
     getReviewMeta();
   }, []);
   return (
-    <div className="review-breakdown">
+    <div className="rating-breakdown">
       <div className="rating-summary-container">
         <div className="average-rating">
-          <span>{averageRating}</span>
+          <span><b>{averageRating}</b></span>
         </div>
         <div className="star-rating">
           <AverageStarRating rating={averageRating} />
@@ -50,45 +50,55 @@ function RatingBreakdown({ id, starClickHandler }) {
       </div>
       <div className="recommend-container">
         <span>
-          {recommands}
+          {recommends}
           % of reviews recommend this product
         </span>
       </div>
       <div className="rating-breakdown-container">
         <div className="stars-ratio-count" onClick={() => { handleStarsClick(5); }}>
-          <u>5 stars</u>
+          <div className="star-number"><u>5 stars</u></div>
           <div className="ratio-bar">
             <PercentagBar ratingPercentage={(ratings[5] / totalReviews) * 100} />
           </div>
-          <span>{ratings[5]}</span>
+          <div className="review-count">
+            <span>{ratings[5]}</span>
+          </div>
         </div>
         <div className="stars-ratio-count" onClick={() => { handleStarsClick(4); }}>
-          <u>4 stars</u>
+        <div className="star-number"><u>4 stars</u></div>
           <div className="ratio-bar">
             <PercentagBar ratingPercentage={(ratings[4] / totalReviews) * 100} />
           </div>
-          <span >{ratings[4]}</span>
+          <div className="review-count">
+            <span>{ratings[4]}</span>
+          </div>
         </div>
         <div className="stars-ratio-count" onClick={() => { handleStarsClick(3); }}>
-          <u>3 stars</u>
+        <div className="star-number"><u>3 stars</u></div>
           <div className="ratio-bar">
             <PercentagBar ratingPercentage={(ratings[3] / totalReviews) * 100} />
           </div>
-          <span>{ratings[3]}</span>
+          <div className="review-count">
+            <span>{ratings[3]}</span>
+          </div>
         </div>
         <div className="stars-ratio-count" onClick={() => { handleStarsClick(2); }}>
-          <u>2 stars</u>
-          <div className="ratio-bar" >
+        <div className="star-number"><u>2 stars</u></div>
+          <div className="ratio-bar">
             <PercentagBar ratingPercentage={(ratings[2] / totalReviews) * 100} />
           </div>
-          <span>{ratings[2]}</span>
+          <div className="review-count">
+            <span>{ratings[2]}</span>
+          </div>
         </div>
         <div className="stars-ratio-count" onClick={() => { handleStarsClick(1); }}>
-          <u>1 stars</u>
+        <div className="star-number"><u>1 stars</u></div>
           <div className="ratio-bar">
             <PercentagBar ratingPercentage={(ratings[1] / totalReviews) * 100} />
           </div>
-          <span >{ratings[1]}</span>
+          <div className="review-count">
+            <span>{ratings[1]}</span>
+          </div>
         </div>
       </div>
     </div>

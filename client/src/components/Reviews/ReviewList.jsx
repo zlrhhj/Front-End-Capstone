@@ -85,34 +85,38 @@ function ReviewList({ id, starFilter }) {
   }
 
   return (
-    <div>
+    <div className="reviews-container">
       <div>
         <SearchBar setQueryItem={setQueryItem} reviewList={reviewList} setFiltered={setFiltered} />
       </div>
-      <div>
-        <span>
+      <div className="dropdown-container">
+        <div>
+          {' '}
           {' '}
           { totalReviews }
           {' '}
-        </span>
-        <div> reviews, sorted by </div>
-        <span className="dropdown-container">
-          <select onChange={onchange}>
-            <option value="relevance" selected>Relevance</option>
-            <option value="helpful">Helpful</option>
-            <option value="newest">Newest</option>
-          </select>
-        </span>
+          {' '}
+          reviews, sorted by
+          {' '}
+
+          <span>
+            <select className="my-select" onChange={onchange}>
+              <option value="relevance" selected>Relevance</option>
+              <option value="helpful">Helpful</option>
+              <option value="newest">Newest</option>
+            </select>
+          </span>
+        </div>
       </div>
       {
         noReviews ? (
-          <div>
-            <button type="button"> ADD A REVIEW + </button>
+          <div className="single-button">
+            <button className="buttons" type="button"> ADD A REVIEW + </button>
           </div>
         )
           : (
-            <div>
-              <div>
+            <div className="reviews-btn-container">
+              <div className="reviews">
                 { queryItem.length < 3
                   ? reviewList.map((review) => (
                     starFilter.every((x) => x === false) || starFilter[review.rating - 1]
@@ -131,11 +135,13 @@ function ReviewList({ id, starFilter }) {
                       ) : ''
                   ))}
               </div>
-              <div>
-                <button type="button" onClick={handleMorebutton}> MORE REVIEWS </button>
-              </div>
-              <div>
-                <button type="button" onClick={addReivewClick}> ADD A REVIEW + </button>
+              <div className="btn-container">
+                <div className="more-review-btn">
+                  <button className="buttons" type="button" onClick={handleMorebutton}> MORE REVIEWS </button>
+                </div>
+                <div className="add-review-btn">
+                  <button className="buttons" type="button" onClick={addReivewClick}> ADD A REVIEW + </button>
+                </div>
               </div>
             </div>
           )

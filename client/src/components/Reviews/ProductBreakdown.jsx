@@ -23,7 +23,7 @@ function ProductBreakdown({ id }) {
         characteristics && characteristics.Quality
           ? (
             <div className="characteristics-container">
-              <span>Quality</span>
+              <div className="characteristic">Quality</div>
               <CharacteristicsBar value={characteristics.Quality.value} labels={['Poor', 'Ok', 'Perfect']} />
             </div>
           ) : ''
@@ -33,6 +33,7 @@ function ProductBreakdown({ id }) {
           ? (
             <div className="characteristics-container">
               <span>Size</span>
+              <div className="characteristic">Size</div>
               <CharacteristicsBar value={2} labels={['Too small', 'Perfect', 'Too large']} />
             </div>
           ) : ''
@@ -41,7 +42,7 @@ function ProductBreakdown({ id }) {
         characteristics && characteristics.Width
           ? (
             <div className="characteristics-container">
-              <span>Width</span>
+              <div className="characteristic">Width</div>
               <CharacteristicsBar value={3} labels={['Too narrow', 'Ok', 'Too wide']} />
             </div>
           ) : ''
@@ -50,7 +51,7 @@ function ProductBreakdown({ id }) {
         characteristics && characteristics.Comfort
           ? (
             <div className="characteristics-container">
-              <span>Comfort</span>
+              <div className="characteristic">Comfort</div>
               <CharacteristicsBar value={4} labels={['Poor', 'Ok', 'Perfect']} />
             </div>
           ) : ''
@@ -59,7 +60,7 @@ function ProductBreakdown({ id }) {
         characteristics && characteristics.Length
           ? (
             <div className="characteristics-container">
-              <span>Length</span>
+              <div className="characteristic">Length</div>
               <CharacteristicsBar value={4} labels={['Short', 'Perfect', 'Long']} />
             </div>
           ) : ''
@@ -68,7 +69,7 @@ function ProductBreakdown({ id }) {
         characteristics && characteristics.Fit
           ? (
             <div className="characteristics-container">
-              <span>Fit</span>
+              <div className="characteristic">Fit</div>
               <CharacteristicsBar value={4} labels={['Tight', 'Perfect', 'Long']} />
             </div>
           ) : ''

@@ -34,11 +34,14 @@ function Review({ review }) {
     }
   };
   return (
-    <div>
-      <div>
-        <div><AverageStarRating rating={review.rating} /></div>
-        <div>{review.reviewer_name}</div>
-        <div>{formattedDate}</div>
+    <div className="review-container">
+      <div className="stars-user-date-container">
+        <div className="stars-container"><AverageStarRating rating={review.rating} /></div>
+        <div className="user-date">
+          {review.reviewer_name}
+          {',  '}
+          {formattedDate}
+        </div>
       </div>
       <div>
         <div>
@@ -94,6 +97,7 @@ function Review({ review }) {
 
         <div />
       </div>
+      <br/>
       <hr />
     </div>
   );

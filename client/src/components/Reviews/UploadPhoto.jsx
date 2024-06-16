@@ -2,7 +2,7 @@ import React from 'react';
 
 const { useState } = React;
 
-function UploadPhoto({setPhotos}) {
+function UploadPhoto({ setPhotos }) {
   const [files, setFiles] = useState([]);
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -13,9 +13,7 @@ function UploadPhoto({setPhotos}) {
   };
   return (
     <div className="upload-container">
-      {files && files.map((file) => (
-        <img src={file.url} className="thumbnail" alt="thumbnail" />
-      ))}
+      {files && files.map((file) => (<img src={file.url} alt="thumbnail" />))}
       {
         files && files.length >= 5 ? ''
           : (
