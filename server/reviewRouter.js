@@ -3,7 +3,18 @@ const reviewRouter = require('express').Router();
 const axios = require('axios');
 
 reviewRouter.post('/reviews', (req, res) => {
+  const url = `${process.env.BASE_URL}/reviews`;
+  const options = {
+    headers: { Authorization: process.env.X_API_KEY },
+  };
   console.log(req.body);
+  axios.post(url, req.body, options)
+    .then((result) => {
+      res.status(201).send(result.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 reviewRouter.get('/reviews', (req, res) => {
   const url = `${process.env.BASE_URL}/reviews`;
