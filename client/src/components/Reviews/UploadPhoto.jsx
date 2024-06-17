@@ -7,13 +7,13 @@ function UploadPhoto({ setPhotos }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const fileURL = URL.createObjectURL(file);
-    const newFiles = [...files, { url: fileURL }];
+    const newFiles = [...files, fileURL];
     setFiles(newFiles);
     setPhotos(newFiles);
   };
   return (
     <div className="upload-container">
-      {files && files.map((file) => (<img src={file.url} alt="thumbnail" />))}
+      {files && files.map((file) => (<img src={file} alt="thumbnail" />))}
       {
         files && files.length >= 5 ? ''
           : (
