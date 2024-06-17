@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import StarRate from './StarRate.jsx';
 import UploadPhoto from './UploadPhoto.jsx';
+import Characteristic from './Characteristic.jsx';
 
 const { useState, useEffect } = React;
 
@@ -12,17 +13,28 @@ function AddReview({ product_id, closeAddReview }) {
   const [recommend, setRecommend] = useState(true);
   const [summary, setSummary] = useState('');
   const [email, setEmail] = useState(null);
-  const [body, setBody] = useState(null);
+  const [body, setBody] = useState('');
   const [bodyCharsLen, setBodyCharsLen] = useState(null);
 
   const [nickname, setNickname] = useState(null);
   const [photos, setPhotos] = useState([]);
-  const [characteristics, setCharacteristics] = useState({});
+  const [charsIdValue, setCharsIdValue] = useState({});
+  const [charsNameId, setCharsNameId] = useState([]);
 
   const getProduct = (id) => {
     axios.get('/products/:product_id', { params: { pid: id } })
       .then((result) => {
         setName(result.data.name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios.get('reviews/meta', { params: { product_id: id } })
+      .then((results) => {
+        const keys = Object.keys(results.data.characteristics);
+        const newChars = keys.map((key) => (
+          { name: key, id: results.data.characteristics[key].id }));
+        setCharsNameId(newChars);
       })
       .catch((err) => {
         console.log(err);
@@ -44,33 +56,13 @@ function AddReview({ product_id, closeAddReview }) {
     setRecommend(e.target.value === true);
   };
 
-  const sizeOnClick = (e) => {
-    const newCharteristics = { ...characteristics, Size: parseInt(e.target.value, 10) };
-    setCharacteristics(newCharteristics);
-  };
+  const characteristicOnClick = (key, value) => {
+    const obj = {};
+    obj[key.toString()] = parseInt(value, 10);
+    const newCharteristics = { ...charsIdValue, obj };
 
-  const widthOnClick = (e) => {
-    const newCharteristics = { ...characteristics, Width: parseInt(e.target.value, 10) };
-    setCharacteristics(newCharteristics);
-  };
-
-  const comfortOnClick = (e) => {
-    const newCharteristics = { ...characteristics, Comfort: parseInt(e.target.value, 10) };
-    setCharacteristics(newCharteristics);
-  };
-
-  const qualityOnClick = (e) => {
-    const newCharteristics = { ...characteristics, Quality: parseInt(e.target.value, 10) };
-    setCharacteristics(newCharteristics);
-  };
-
-  const lengthOnClick = (e) => {
-    const newCharteristics = { ...characteristics, Length: parseInt(e.target.value, 10) };
-    setCharacteristics(newCharteristics);
-  };
-  const fitOnClick = (e) => {
-    const newCharteristics = { ...characteristics, Fit: parseInt(e.target.value, 10) };
-    setCharacteristics(newCharteristics);
+    console.log(newCharteristics);
+    setCharsIdValue(newCharteristics);
   };
 
   const summaryChange = (e) => {
@@ -102,10 +94,11 @@ function AddReview({ product_id, closeAddReview }) {
     } else {
       messages.push('Overall Rating');
     }
-
-    if (Object.keys(characteristics).length > 0) {
-      console.log(characteristics);
-      data.characteristics = { ...characteristics };
+    console.log(charsIdValue);
+    if (Object.keys(charsIdValue).length > 0) {
+      console.log('hello');
+      console.log(charsIdValue);
+      // data.characteristics = { ...charsIdValue };
     } else {
       messages.push('Characteristics');
     }
@@ -179,202 +172,15 @@ function AddReview({ product_id, closeAddReview }) {
         </div>
         <div className="characteristcs">
           <h3>characteristcis</h3>
-          <div className="product-size">
-            <fieldset>
-              <legend>Size</legend>
-              <div className="radio-container">
-                <label className="radio-btn">
-                  {' '}
-                  <input type="radio" id="size1" name="size" value="1" onClick={sizeOnClick} />
-                  A size too small
-                </label>
+          {
+            charsNameId.map((item) => (
+              <Characteristic
+                feature={item}
+                onclick={characteristicOnClick}
+              />
 
-                <label className="radio-btn">
-                  <input type="radio" id="size2" name="size" value="2" onClick={sizeOnClick} />
-                  1/2 a size too small
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="size3" name="size" value="3" onClick={sizeOnClick} />
-                  Perfect
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="size4" name="size" value="4" onClick={sizeOnClick} />
-                  1/2 a size too big
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="size5" name="size" value="5" onClick={sizeOnClick} />
-                  A size too wide
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          <div className="product-width">
-            <fieldset>
-              <legend>Width</legend>
-              <div className="radio-container">
-
-                <label className="radio-btn">
-                  <input type="radio" id="width1" name="width" value="1" onClick={widthOnClick} />
-                  Too narrow
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="width2" name="width" value="2" onClick={widthOnClick} />
-                  Slightly narrow
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="width3" name="width" value="3" onClick={widthOnClick} />
-                  Ok
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="width4" name="width" value="4" onClick={widthOnClick} />
-                  Slightly wide
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="width5" name="width" value="5" onClick={widthOnClick} />
-                  Too wide
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          <div className="product-comfort">
-            <fieldset>
-              <legend>Comfort</legend>
-              <div className="radio-container">
-
-                <label className="radio-btn">
-                  <input type="radio" id="comfort1" name="comfort" value="1" onClick={comfortOnClick} />
-                  Uncomfortable
-                </label>
-
-                <label className="radio-btn">
-                  {' '}
-                  <input type="radio" id="comfort2" name="comfort" value="2" onClick={comfortOnClick} />
-                  Slightly uncomfortable
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="comfort3" name="comfort" value="3" onClick={comfortOnClick} />
-                  Ok
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="comfort4" name="comfort" value="4" onClick={comfortOnClick} />
-                  Comfortable
-                </label>
-
-                <label className="radio-btn">
-                  {' '}
-                  <input type="radio" id="comfort5" name="comfort" value="5" onClick={comfortOnClick} />
-                  Perfect
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          <div className="product-quality">
-            <fieldset>
-              <legend>Quality</legend>
-              <div className="radio-container">
-
-                <label className="radio-btn">
-                  <input type="radio" id="quality1" name="quality" value="1" onClick={qualityOnClick} />
-                  Poor
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="quality2" name="quality" value="2" onClick={qualityOnClick} />
-                  Below average
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="quality3" name="quality" value="3" onClick={qualityOnClick} />
-                  What I expected
-                </label>
-
-                <label className="radio-btn">
-                  {' '}
-                  <input type="radio" id="quality4" name="quality" value="4" onClick={qualityOnClick} />
-                  Pretty great
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="quality5" name="quality" value="5" onClick={qualityOnClick} />
-                  Perfect
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          <div className="product-length">
-            <fieldset>
-              <legend>Length</legend>
-              <div className="radio-container">
-
-                <label className="radio-btn">
-                  <input type="radio" id="length1" name="length" value="1" onClick={lengthOnClick} />
-                  Runs short
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="length2" name="length" value="2" onClick={lengthOnClick} />
-                  Runs slightly short
-                </label>
-
-                <label className="radio-btn">
-                  {' '}
-                  <input type="radio" id="length3" name="length" value="3" onClick={lengthOnClick} />
-                  Perfect
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="length4" name="length" value="4" onClick={lengthOnClick} />
-                  Runs slightly long
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="length5" name="length" value="5" onClick={lengthOnClick} />
-                  Runs long
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          <div className="product-fit">
-            <fieldset>
-              <legend>Fit</legend>
-              <div className="radio-container">
-
-                <label className="radio-btn">
-                  <input type="radio" id="fit1" name="fit" value="1" onClick={fitOnClick} />
-                  Runs tight
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="fit2" name="fit" value="2" onClick={fitOnClick} />
-                  Runs slightly tight
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="fit3" name="fit" value="3" onClick={fitOnClick} />
-                  Perfect
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="fit4" name="fit" value="4" onClick={fitOnClick} />
-                  Runs slightly long
-                </label>
-
-                <label className="radio-btn">
-                  <input type="radio" id="fit5" name="fit" value="5" onClick={fitOnClick} />
-                  Runs long
-                </label>
-              </div>
-            </fieldset>
-          </div>
+            ))
+          }
         </div>
         <div>
           <h3>Review Summary</h3>
