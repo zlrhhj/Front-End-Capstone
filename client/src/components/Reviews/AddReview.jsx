@@ -57,11 +57,8 @@ function AddReview({ product_id, closeAddReview }) {
   };
 
   const characteristicOnClick = (key, value) => {
-    const obj = {};
-    obj[key.toString()] = parseInt(value, 10);
-    const newCharteristics = { ...charsIdValue, obj };
-
-    console.log(newCharteristics);
+    const newCharteristics = { ...charsIdValue };
+    newCharteristics[key.toString()] = parseInt(value, 10);
     setCharsIdValue(newCharteristics);
   };
 
@@ -96,9 +93,7 @@ function AddReview({ product_id, closeAddReview }) {
     }
     console.log(charsIdValue);
     if (Object.keys(charsIdValue).length > 0) {
-      console.log('hello');
-      console.log(charsIdValue);
-      // data.characteristics = { ...charsIdValue };
+      data.characteristics = { ...charsIdValue };
     } else {
       messages.push('Characteristics');
     }
@@ -121,12 +116,14 @@ function AddReview({ product_id, closeAddReview }) {
 
     data.recommend = recommend;
     data.photos = photos;
+
     if (messages.length > 1) {
       alert(messages.join('\n'));
     } else {
       axios.post('/reviews', data)
         .then((result) => {
-          console.log(result.data);
+          created = true;
+          alert('The review is created!');
         })
         .catch((err) => {
           console.log(err);
