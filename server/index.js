@@ -1,5 +1,6 @@
 require("dotenv").config();
-const axios require('axios');
+const controller = require('./overviewController');
+const axios = require('axios');
 
 const express = require("express");
 const path = require("path");
@@ -14,7 +15,10 @@ const instance = axios.create({
   "X-API-Key": process.env.X_API_KEY
 });
 
-
+app.get('/products/*/styles', controller.getStyles);
+app.get('/products/*', controller.getProduct);
+app.get('/reviews/meta/*', controller.getReviewData);
+app.post('/cart', controller.postCart);
 
 
 app.listen(process.env.PORT);
