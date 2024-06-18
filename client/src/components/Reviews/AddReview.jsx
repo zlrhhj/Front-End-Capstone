@@ -6,7 +6,7 @@ import Characteristic from './Characteristic.jsx';
 
 const { useState, useEffect } = React;
 
-function AddReview({ product_id, closeAddReview }) {
+function AddReview({ product_id, created, closeAddReview }) {
   const [showModal, setShowModal] = useState(true);
   const [name, setName] = useState('');
   const [rating, setRating] = useState(null);
@@ -91,7 +91,6 @@ function AddReview({ product_id, closeAddReview }) {
     } else {
       messages.push('Overall Rating');
     }
-    console.log(charsIdValue);
     if (Object.keys(charsIdValue).length > 0) {
       data.characteristics = { ...charsIdValue };
     } else {
@@ -116,14 +115,12 @@ function AddReview({ product_id, closeAddReview }) {
 
     data.recommend = recommend;
     data.photos = photos;
-
     if (messages.length > 1) {
       alert(messages.join('\n'));
     } else {
       axios.post('/reviews', data)
         .then((result) => {
-          created = true;
-          alert('The review is created!');
+          closeAddReview();
         })
         .catch((err) => {
           console.log(err);
@@ -134,6 +131,9 @@ function AddReview({ product_id, closeAddReview }) {
   useEffect(() => {
     getProduct(product_id);
   }, []);
+  if (created) {
+    return null;
+  }
   return (
     <div className="add-review">
       <span className="close" onClick={clickClose}>&times;</span>
@@ -213,7 +213,6 @@ function AddReview({ product_id, closeAddReview }) {
         </div>
 
       </form>
-
     </div>
   );
 }
