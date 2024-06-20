@@ -147,11 +147,11 @@ function AddReview({ product_id, closeAddReview }) {
         <div>
           <h3>Overall rating (mandatory)</h3>
           <div className="star-rating">
-            <p>
+            <div>
               {' '}
               <StarRate setStarRating={setStarRating} />
               {' '}
-            </p>
+            </div>
           </div>
 
         </div>
