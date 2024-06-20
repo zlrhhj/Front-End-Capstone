@@ -15,7 +15,6 @@ reviewRouter.post('/reviews', (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-    res.status(201).send();
 });
 reviewRouter.get('/reviews', (req, res) => {
   const url = `${process.env.BASE_URL}/reviews`;
