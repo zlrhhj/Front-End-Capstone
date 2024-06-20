@@ -8,13 +8,15 @@ reviewRouter.post('/reviews', (req, res) => {
     headers: { Authorization: process.env.X_API_KEY },
   };
   console.log(req.body);
+  /*
   axios.post(url, req.body, options)
     .then((result) => {
       res.status(201).send(result.data);
     })
     .catch((err) => {
       res.send(err);
-    });
+    });*/
+    res.status(201).send();
 });
 reviewRouter.get('/reviews', (req, res) => {
   const url = `${process.env.BASE_URL}/reviews`;
@@ -73,7 +75,7 @@ reviewRouter.put('/reviews/:review_id/helpful', (req, res) => {
 
   axios.put(url, {}, options)
     .then((result) => {
-      res.status(204).send(result);
+      res.status(204).send(result.data);
     })
     .catch((err) => {
       console.log(err);
