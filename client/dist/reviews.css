@@ -173,7 +173,14 @@
   margin-top: 20px;
 }
 /* Rating and Review widget */
+.reviews-widget {
+  display: flex;
+  justify-content: center;
+}
 .rating-and-reviews {
+  width: 50%;
+  justify-content: center;
+  min-width: 1000px;
   padding-top: 30px;
   padding-left:40px;
   padding-right: 40px;
