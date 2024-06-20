@@ -7,15 +7,14 @@ reviewRouter.post('/reviews', (req, res) => {
   const options = {
     headers: { Authorization: process.env.X_API_KEY },
   };
-  console.log(req.body);
-  /*
+
   axios.post(url, req.body, options)
     .then((result) => {
       res.status(201).send(result.data);
     })
     .catch((err) => {
       res.send(err);
-    });*/
+    });
     res.status(201).send();
 });
 reviewRouter.get('/reviews', (req, res) => {
